@@ -1,0 +1,215 @@
+﻿Collecting SLL Objects...
+
+Warning! Some methods do not have header comments.
+
+Filing out Module "WorldHandicap" ...
+   Filing out class headers belonging to WorldHandicap ...
+      WorldHandicapNewPlayerDialog
+      WorldHandicapRoundEditDialog
+      WorldHandicapSystemUI
+      WorldHandicapDatabase
+      WorldHandicapPlayer
+      WorldHandicapRound
+   Filing out WorldHandicapDatabase class>>includeClass
+   Filing out WorldHandicapDatabase>>assignDaysPassed
+   Filing out WorldHandicapDatabase>>assignRoundNumber
+   Filing out WorldHandicapDatabase>>loadFromGhinFile:
+   Filing out WorldHandicapDatabase>>playedCoursesForPlayer:
+   Filing out WorldHandicapDatabase>>playedTeesForCourse:player:
+   Filing out WorldHandicapDatabase>>recentTwentyRounds
+   Filing out WorldHandicapDatabase>>rounds
+   Filing out WorldHandicapDatabase>>rounds:
+   Filing out WorldHandicapDatabase>>sortRoundsByDate
+   Filing out WorldHandicapNewPlayerDialog class>>includeClass
+   Filing out WorldHandicapNewPlayerDialog class>>wbBasicVersion
+   Filing out WorldHandicapNewPlayerDialog>>cancelButtonClicked
+   Filing out WorldHandicapNewPlayerDialog>>createViews
+   Filing out WorldHandicapNewPlayerDialog>>entryGhin
+   Filing out WorldHandicapNewPlayerDialog>>entryGhin:
+   Filing out WorldHandicapNewPlayerDialog>>entryName
+   Filing out WorldHandicapNewPlayerDialog>>entryName:
+   Filing out WorldHandicapNewPlayerDialog>>fieldEdited
+   Filing out WorldHandicapNewPlayerDialog>>initWindow
+   Filing out WorldHandicapNewPlayerDialog>>isValidGhinFile:
+   Filing out WorldHandicapNewPlayerDialog>>markModified
+   Filing out WorldHandicapNewPlayerDialog>>newPlayer
+   Filing out WorldHandicapNewPlayerDialog>>newPlayer:
+   Filing out WorldHandicapNewPlayerDialog>>openOn
+   Filing out WorldHandicapNewPlayerDialog>>saveButtonClicked
+   Filing out WorldHandicapNewPlayerDialog>>saved
+   Filing out WorldHandicapNewPlayerDialog>>saved:
+   Filing out WorldHandicapNewPlayerDialog>>unsaved
+   Filing out WorldHandicapNewPlayerDialog>>unsaved:
+   Filing out WorldHandicapNewPlayerDialog>>views
+   Filing out WorldHandicapNewPlayerDialog>>views:
+   Filing out WorldHandicapNewPlayerDialog>>warningMessage
+   Filing out WorldHandicapNewPlayerDialog>>wasSaved
+   Filing out WorldHandicapPlayer class>>fromLine:into:
+   Filing out WorldHandicapPlayer class>>getGhinFromFileName:
+   Filing out WorldHandicapPlayer class>>includeClass
+   Filing out WorldHandicapPlayer>>database
+   Filing out WorldHandicapPlayer>>database:
+   Filing out WorldHandicapPlayer>>displayHandicapIndex:
+   Filing out WorldHandicapPlayer>>ghinNumber
+   Filing out WorldHandicapPlayer>>ghinNumber:
+   Filing out WorldHandicapPlayer>>handicapIndexDeductionForRoundCount:
+   Filing out WorldHandicapPlayer>>handicapIndexForCourse:tee:
+   Filing out WorldHandicapPlayer>>handicapIndexForRounds:
+   Filing out WorldHandicapPlayer>>maxAfterNext
+   Filing out WorldHandicapPlayer>>maxAfterSimulatedRounds:
+   Filing out WorldHandicapPlayer>>maxAfterThree
+   Filing out WorldHandicapPlayer>>maxAfterTwo
+   Filing out WorldHandicapPlayer>>numUsedBasedOn:
+   Filing out WorldHandicapPlayer>>playedCourses
+   Filing out WorldHandicapPlayer>>playedTeesForCourse:
+   Filing out WorldHandicapPlayer>>playerName
+   Filing out WorldHandicapPlayer>>playerName:
+   Filing out WorldHandicapPlayer>>playerRecentTwentyRounds
+   Filing out WorldHandicapPlayer>>simulateWorstCaseRoundWithDate:
+   Filing out WorldHandicapPlayer>>usedRoundsRanking
+   Filing out WorldHandicapRound class>>fromTabLine:
+   Filing out WorldHandicapRound class>>includeClass
+   Filing out WorldHandicapRound>>abbrevDayNameForDate:
+   Filing out WorldHandicapRound>>assignDayOfWeek
+   Filing out WorldHandicapRound>>calculateHandicapIndexForRounds:
+   Filing out WorldHandicapRound>>courseName
+   Filing out WorldHandicapRound>>courseName:
+   Filing out WorldHandicapRound>>database
+   Filing out WorldHandicapRound>>database:
+   Filing out WorldHandicapRound>>date
+   Filing out WorldHandicapRound>>date:
+   Filing out WorldHandicapRound>>dateString
+   Filing out WorldHandicapRound>>dayOfWeek
+   Filing out WorldHandicapRound>>dayOfWeek:
+   Filing out WorldHandicapRound>>daysPassed
+   Filing out WorldHandicapRound>>daysPassed:
+   Filing out WorldHandicapRound>>displayColor
+   Filing out WorldHandicapRound>>index
+   Filing out WorldHandicapRound>>isOutsideRecent
+   Filing out WorldHandicapRound>>isRecent
+   Filing out WorldHandicapRound>>isUsed
+   Filing out WorldHandicapRound>>parTees
+   Filing out WorldHandicapRound>>parTees:
+   Filing out WorldHandicapRound>>pcc
+   Filing out WorldHandicapRound>>pcc:
+   Filing out WorldHandicapRound>>player
+   Filing out WorldHandicapRound>>player:
+   Filing out WorldHandicapRound>>rating
+   Filing out WorldHandicapRound>>rating:
+   Filing out WorldHandicapRound>>roundDifferential
+   Filing out WorldHandicapRound>>roundNumber
+   Filing out WorldHandicapRound>>roundNumber:
+   Filing out WorldHandicapRound>>roundType
+   Filing out WorldHandicapRound>>roundType:
+   Filing out WorldHandicapRound>>score
+   Filing out WorldHandicapRound>>score:
+   Filing out WorldHandicapRound>>slope
+   Filing out WorldHandicapRound>>slope:
+   Filing out WorldHandicapRound>>strokes
+   Filing out WorldHandicapRound>>tees
+   Filing out WorldHandicapRound>>tees:
+   Filing out WorldHandicapRound>>usedIndicator
+   Filing out WorldHandicapRound>>usedIndicator:
+   Filing out WorldHandicapRoundEditDialog class>>includeClass
+   Filing out WorldHandicapRoundEditDialog class>>wbBasicVersion
+   Filing out WorldHandicapRoundEditDialog>>cancelButtonClicked
+   Filing out WorldHandicapRoundEditDialog>>courseComboChanged
+   Filing out WorldHandicapRoundEditDialog>>createViews
+   Filing out WorldHandicapRoundEditDialog>>editButton
+   Filing out WorldHandicapRoundEditDialog>>fieldChanged
+   Filing out WorldHandicapRoundEditDialog>>initWindow
+   Filing out WorldHandicapRoundEditDialog>>openOn:
+   Filing out WorldHandicapRoundEditDialog>>populateCourseCombo
+   Filing out WorldHandicapRoundEditDialog>>populateFieldsForNewRound
+   Filing out WorldHandicapRoundEditDialog>>populateFieldsFromRound
+   Filing out WorldHandicapRoundEditDialog>>populateTeesComboForCourse:
+   Filing out WorldHandicapRoundEditDialog>>round
+   Filing out WorldHandicapRoundEditDialog>>round:
+   Filing out WorldHandicapRoundEditDialog>>saveButtonClicked
+   Filing out WorldHandicapRoundEditDialog>>saved
+   Filing out WorldHandicapRoundEditDialog>>saved:
+   Filing out WorldHandicapRoundEditDialog>>teesComboChanged
+   Filing out WorldHandicapRoundEditDialog>>unsaved
+   Filing out WorldHandicapRoundEditDialog>>unsaved:
+   Filing out WorldHandicapRoundEditDialog>>views
+   Filing out WorldHandicapRoundEditDialog>>views:
+   Filing out WorldHandicapRoundEditDialog>>warningMessage
+   Filing out WorldHandicapRoundEditDialog>>wasSaved
+   Filing out WorldHandicapSystemUI class>>includeClass
+   Filing out WorldHandicapSystemUI class>>wbBasicVersion
+   Filing out WorldHandicapSystemUI>>aboutGhin
+   Filing out WorldHandicapSystemUI>>createMenus:
+   Filing out WorldHandicapSystemUI>>createViews
+   Filing out WorldHandicapSystemUI>>currentPlayer
+   Filing out WorldHandicapSystemUI>>currentPlayer:
+   Filing out WorldHandicapSystemUI>>deleteRound
+   Filing out WorldHandicapSystemUI>>editRound
+   Filing out WorldHandicapSystemUI>>exitProgram
+   Filing out WorldHandicapSystemUI>>fileExit
+   Filing out WorldHandicapSystemUI>>fileOpen
+   Filing out WorldHandicapSystemUI>>fileSave
+   Filing out WorldHandicapSystemUI>>initWindow
+   Filing out WorldHandicapSystemUI>>newPlayer
+   Filing out WorldHandicapSystemUI>>newRound
+   Filing out WorldHandicapSystemUI>>newRoundMenubar
+   Filing out WorldHandicapSystemUI>>newRoundOnCourse
+   Filing out WorldHandicapSystemUI>>openNewRoundEditorWith:tee:score:
+   Filing out WorldHandicapSystemUI>>populateCourseGridFromMainGrid
+   Filing out WorldHandicapSystemUI>>populatePlayerFields
+   Filing out WorldHandicapSystemUI>>populateRoundsGrid
+   Filing out WorldHandicapSystemUI>>saveToFile:
+   Filing out WorldHandicapSystemUI>>selectedCourse
+   Filing out WorldHandicapSystemUI>>selectedRound
+   Filing out WorldHandicapSystemUI>>selectedTee
+   Filing out WorldHandicapSystemUI>>unsaved
+   Filing out WorldHandicapSystemUI>>unsaved:
+   Filing out WorldHandicapSystemUI>>updateAfterRoundsChanged
+   Filing out WorldHandicapSystemUI>>views
+   Filing out WorldHandicapSystemUI>>views:
+Done!
+
+Generating "info" file...
+
+Building SLL...
+
+
+Creating NLS file...
+     The current NLS file is OK.
+
+Generating "test plan" file...
+Walking objects...
+   imported: AssocExternal ( 'Menu' ) ...
+   imported: AssocExternal ( 'MessageBox' ) ...
+   imported: AssocExternal ( 'SysFont' ) ...
+   imported: AssocExternal ( 'Button' ) ...
+   imported: AssocExternal ( 'EnhancedEntryField' ) ...
+   imported: AssocExternal ( 'StaticText' ) ...
+   imported: AssocExternal ( 'LayoutFrame' ) ...
+   imported: AssocExternal ( 'FileDialog' ) ...
+   imported: AssocExternal ( 'CPColumnarListBox' ) ...
+   imported: AssocExternal ( 'Font' ) ...
+   imported: AssocExternal ( 'Color' ) ...
+   imported: AssocExternal ( 'RGBColor' ) ...
+   imported: AssocExternal ( 'CPCLBField' ) ...
+   imported: AssocExternal ( 'WideEnhancedComboBox' ) ...
+   imported: AssocExternal ( 'DropDownList' ) ...
+   adding WorldHandicapNewPlayerDialog ...
+   imported: GlobalExternal ( 'WindowDialog' ) ...
+   adding WorldHandicapRoundEditDialog ...
+   imported: AssocExternal ( 'CalendarDialog' ) ...
+   adding WorldHandicapSystemUI ...
+   imported: GlobalExternal ( 'ViewManager' ) ...
+   adding WorldHandicapRound ...
+   adding WorldHandicapDatabase ...
+   adding WorldHandicapPlayer ...
+Writing file: C:\LabWare-8\SOURCE\!WorldHandicap.sll ...
+....................   object space written, 672 objects, 37253 bytes
+   writing source code...
+...done.
+
+--- SLL Dependencies -------------------------------------------------------------------------
+    <none>
+------------------------------------------------------------------------------------------------------------
+
+Complete!
+
