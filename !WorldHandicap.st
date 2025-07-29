@@ -6,10 +6,10 @@ WindowDialog subclass: #WorldHandicapNewPlayerDialog
     ' ColorConstants OperatingSystemConstants ' !
 WindowDialog subclass: #WorldHandicapRoundEditDialog
   instanceVariableNames: 
-    ' round saved unsaved '
+    ' round saved unsaved player '
   classVariableNames: ''
   poolDictionaries: 
-    ' ColorConstants OperatingSystemConstants '    !
+    ' ColorConstants OperatingSystemConstants ' !
 ViewManager subclass: #WorldHandicapSystemUI
   instanceVariableNames: 
     ' currentPlayer unsaved '
@@ -143,6 +143,31 @@ loadFromGhinFile: fileName
 
 !WorldHandicapDatabase methods !
 
+mostRecentRoundForCourse: aCourse tee: aTee player: aPlayer 
+
+    | filteredRounds |
+    #CodeTrackerBlock.  "Last Modified  13:47:43 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    filteredRounds := self rounds select: [:r |
+        r player = aPlayer and: [r courseName = aCourse and: [r tees = aTee]]].
+    filteredRounds isEmpty
+        ifTrue:[^nil]
+        ifFalse:[
+            ^(filteredRounds asSortedCollection: [:a :b | (Date fromString: a date) > (Date fromString: b date)]) first].! !
+
+
+
+!WorldHandicapDatabase methods !
+ 
 playedCoursesForPlayer: aPlayer 
 
 	"unique courses a player has played."
@@ -158,39 +183,6 @@ playedCoursesForPlayer: aPlayer
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
     ^(self rounds select: [:r | r player = aPlayer] collect: [:r | r courseName]) asSet asSortedCollection.! !
-
-
-
-!WorldHandicapDatabase methods !
-   
-playedTeesForCourse: aCourse player: aPlayer 
-
-    | selectedRounds teesDict sortedTees |
-    #CodeTrackerBlock.  "Last Modified  14:33:04 07/28/25"
-    #LabWare. "Owner"
-    #?. "Type"
-    #?. "Project"
-    #WorldHandicap. "Module"
-    #?. "Unit"
-    #SS5. "RevisedBy"
-    #NotReviewed. "ReviewedBy"
-    #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
-
-    selectedRounds := (self rounds select: [:r | r player = aPlayer and: [r courseName = aCourse]]).
-    teesDict := Dictionary new.
-    selectedRounds do: [:r |
-        | existing mostRecent|existing := teesDict at: r tees ifAbsent: [nil].
-        mostRecent := existing isNil
-            ifTrue:[r]
-            ifFalse:[
-                ((Date fromString: r date) > (Date fromString: existing date))
-                    ifTrue:[r]
-                    ifFalse:[existing]].
-        teesDict at: r tees put: mostRecent].
-    sortedTees := teesDict keys asSortedCollection: [:a :b |
-        (teesDict at: a) rating < (teesDict at: b) rating].
-    ^sortedTees.! !
 
 
 
@@ -278,6 +270,32 @@ sortRoundsByDate
             ifTrue:[a roundDifferential < b roundDifferential] "Lower differential first for same day"
             ifFalse:[dateA > dateB] "Most recent date first"
         ]! !
+
+
+
+!WorldHandicapDatabase methods !
+
+uniqueTeesForCourse: aCourse 
+
+    | courseRounds teesDict |
+    #CodeTrackerBlock.  "Last Modified  13:43:12 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    courseRounds := self rounds select: [:r | r courseName = aCourse].
+    teesDict := Dictionary new.
+    courseRounds do: [:r |
+        | existing|existing := teesDict at: r tees ifAbsent: [nil].
+        ((existing isNil) or: [(Date fromString: r date) > (Date fromString: existing date)])
+            ifTrue:[teesDict at: r tees put: r].].
+    ^teesDict values.! !
 
 
 
@@ -998,6 +1016,72 @@ includeClass
 
 !WorldHandicapPlayer methods !
    
+assignRankIndicatorsTo: rounds 
+
+    | rank lastDiff rankCount |
+    #CodeTrackerBlock.  "Last Modified  15:38:52 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    rank := 1.
+    lastDiff := nil.
+    rankCount := 0.
+    rounds do: [:r |
+        rankCount := rankCount + 1.
+        (lastDiff notNil and: [r roundDifferential = lastDiff])
+            ifFalse:[rank := rankCount].
+        r usedIndicator: rank asString.
+        lastDiff := r roundDifferential.].! !
+
+
+
+!WorldHandicapPlayer methods !
+
+averageDifferentialOf: rounds 
+
+	"average differential of the cgiven collected rounds."
+    #CodeTrackerBlock.  "Last Modified  17:10:01 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    ^(rounds inject: 0 into: [:sum :each | sum + each roundDifferential]) / rounds size.! !
+
+
+
+!WorldHandicapPlayer methods !
+
+clearUsedIndicatorsOnRecentRounds
+    #CodeTrackerBlock.  "Last Modified  15:38:33 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    self playerRecentTwentyRounds do: [:r | r usedIndicator: ''].! !
+
+
+
+!WorldHandicapPlayer methods !
+
 database
     #CodeTrackerBlock.  "Last Modified  14:29:02 07/23/25"
     #LabWare. "Owner"
@@ -1143,8 +1227,9 @@ handicapIndexForCourse: aCourse tee: aTee
    
 handicapIndexForRounds: roundCollection 
 
-    | numRounds bestRounds deduction sortedByDiff avgHandicapIndex cutoffValue usedRounds |
-    #CodeTrackerBlock.  "Last Modified  17:08:24 07/26/25"
+"player's handicap index for the given rounds, or 'N.H' if < 3 rounds"
+    | numRounds deduction usedRounds bestN sorted avgIndex |
+    #CodeTrackerBlock.  "Last Modified  16:25:35 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -1158,24 +1243,17 @@ handicapIndexForRounds: roundCollection
     numRounds := roundCollection size.
     numRounds < 3
         ifTrue:[^'N.H.'].
-    bestRounds := self numUsedBasedOn: numRounds.
+    bestN := self numUsedBasedOn: numRounds.
     deduction := self handicapIndexDeductionForRoundCount: numRounds.
-
-	 "Sort by differential, lowest first"
-    sortedByDiff := roundCollection asSortedCollection: [:a :b |
-        a roundDifferential < b roundDifferential].
-
-	 "Find cutoff differential for the Nth best (to include ties)"
-    cutoffValue := (sortedByDiff at: bestRounds) roundDifferential.
-    usedRounds := sortedByDiff select: [:r | r roundDifferential <= cutoffValue].
-    avgHandicapIndex := (
-        ((usedRounds inject: 0 into: [:acc :each | acc + each roundDifferential]) / usedRounds size) - deduction).
-    ^avgHandicapIndex roundTo: 0.1! !
+    sorted := self roundsSortedByLowestDifferential: roundCollection.
+    usedRounds := self selectUsedRoundsFrom: sorted bestN: bestN.
+    avgIndex := (self averageDifferentialOf: usedRounds) - deduction.
+    ^avgIndex roundTo: 0.1! !
 
 
 
 !WorldHandicapPlayer methods !
-  
+
 maxAfterNext
     #CodeTrackerBlock.  "Last Modified  15:36:23 07/27/25"
     #LabWare. "Owner"
@@ -1198,7 +1276,7 @@ maxAfterSimulatedRounds: count
 
 	"Return the maximum possible handicap index after 'count' simulated future bad rounds."
     | recentRounds simulatedRounds futureDate allRounds |
-    #CodeTrackerBlock.  "Last Modified  16:08:54 07/27/25"
+    #CodeTrackerBlock.  "Last Modified  18:14:24 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -1215,18 +1293,18 @@ maxAfterSimulatedRounds: count
         futureDate := (Date today addDays: i).
         simulatedRounds add: (self simulateWorstCaseRoundWithDate: futureDate).].
 
-	"Remove the oldest N rounds to maintain only 20"
+	"Remove the oldest N rounds to maintain 20"
     (recentRounds size + simulatedRounds size > 20)
         ifTrue:[recentRounds := recentRounds copyFrom: 1 to: (20 - simulatedRounds size)].
-    allRounds := simulatedRounds , recentRounds.
+    allRounds := simulatedRounds , recentRounds. "ombines the two collections into one"
     ^self handicapIndexForRounds: allRounds.! !
 
 
 
 !WorldHandicapPlayer methods !
-  
+
 maxAfterThree
-    #CodeTrackerBlock.  "Last Modified  15:37:02 07/27/25"
+    #CodeTrackerBlock.  "Last Modified  16:35:28 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -1393,12 +1471,57 @@ playerRecentTwentyRounds
 
 !WorldHandicapPlayer methods !
  
+roundsSortedByLowestDifferential: roundCollection 
+
+	"rounds sorted in ascending order of round differential (lowest first)."
+    #CodeTrackerBlock.  "Last Modified  16:21:04 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    ^roundCollection asSortedCollection: [:a :b |
+        a roundDifferential < b roundDifferential].! !
+
+
+
+!WorldHandicapPlayer methods !
+ 
+selectUsedRoundsFrom: sortedRounds bestN: n 
+
+	"Returns the best n rounds from sortedRounds, including all rounds tied at the nth differential.
+If multiple rounds share the cutoff value, all are included."
+    | effectiveN cutoffValue |
+    #CodeTrackerBlock.  "Last Modified  16:53:24 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    effectiveN := n min: sortedRounds size.
+    cutoffValue := (sortedRounds at: effectiveN) roundDifferential.
+    ^sortedRounds select: [:r | r roundDifferential <= cutoffValue].! !
+
+
+
+!WorldHandicapPlayer methods !
+
 simulateWorstCaseRoundWithDate: aDate 
 
 	"Create a simulated round with a very high differential and a future date to calculate
 	handicapindex max after next, maxt after two, and max after three"
     | round |
-    #CodeTrackerBlock.  "Last Modified  16:08:19 07/27/25"
+    #CodeTrackerBlock.  "Last Modified  16:40:24 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -1414,22 +1537,20 @@ simulateWorstCaseRoundWithDate: aDate
     round date: aDate printString.
     round courseName: 'SimulatedCourse'.
     round tees: 'SimulatedTee'.
-    round rating: 70.0. "Use typical or recent values"
+    round rating: 70.0.
     round slope: 120.
     round parTees: 72.
     round pcc: 0.
-    round score: 130. "Score that will yield a high differential"
+    round score: 130.
     round roundType: 'S'.
     ^round.! !
 
 
 
 !WorldHandicapPlayer methods !
-
-usedRoundsRanking
-
-    | bestN rank lastDifferential rankCount sortedByDiff cutoffValue usedRounds |
-    #CodeTrackerBlock.  "Last Modified  13:22:40 07/28/25"
+   
+sortedRecentRoundsByDifferential
+    #CodeTrackerBlock.  "Last Modified  16:39:02 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -1440,43 +1561,53 @@ usedRoundsRanking
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
-    self playerRecentTwentyRounds isEmpty
-        ifTrue:[^nil]. "player may not have rounds yet"
-    bestN := (self numUsedBasedOn: self playerRecentTwentyRounds size).
-    sortedByDiff := self playerRecentTwentyRounds asSortedCollection: [:a :b |
-        a roundDifferential < b roundDifferential].
-    (bestN = 0 or: [sortedByDiff isEmpty])
+    ^self playerRecentTwentyRounds asSortedCollection: [:a :b |
+        a roundDifferential < b roundDifferential].! !
+
+
+
+!WorldHandicapPlayer methods !
+  
+usedRoundsRanking
+
+"player's recent twenty rounds should be marked as 'used'"
+
+"selects the best N rounds by differential"
+
+"clears existing 'used', assigns to selected rounds, and returns the used rounds collection."
+    | bestN cutoffValue usedRounds sortedRounds |
+    #CodeTrackerBlock.  "Last Modified  16:12:32 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    (self playerRecentTwentyRounds isEmpty or: [(self numUsedBasedOn: self playerRecentTwentyRounds size) = 0])
         ifTrue:[
-            self playerRecentTwentyRounds do: [:r | r usedIndicator: ''].
+            self clearUsedIndicatorsOnRecentRounds.
             ^nil].
-    bestN > sortedByDiff size
-        ifTrue:[bestN := sortedByDiff size].
-    cutoffValue := (sortedByDiff at: bestN) roundDifferential.
-    usedRounds := sortedByDiff select: [:r | r roundDifferential <= cutoffValue].
-    rank := 1.
-    lastDifferential := nil.
-    rankCount := 0.
-
-	"Clear usedIndicator on all rounds in recent twenty"
-    self playerRecentTwentyRounds do: [:r | r usedIndicator: ''].
-
-	"Assign rank numbers and indicators for used rounds"
-    usedRounds do: [:r |
-        rankCount := rankCount + 1.
-        (lastDifferential notNil and: [r roundDifferential = lastDifferential])
-            ifTrue:[] "do nothing if tie"
-            ifFalse:[rank := rankCount]. "set new rank if not a tie"
-        r usedIndicator: rank asString.
-        lastDifferential := r roundDifferential.].! !
+    bestN := self numUsedBasedOn: self playerRecentTwentyRounds size.
+    sortedRounds := self sortedRecentRoundsByDifferential.
+    bestN := bestN min: sortedRounds size.
+    cutoffValue := (sortedRounds at: bestN) roundDifferential.
+    usedRounds := sortedRounds select: [:r | r roundDifferential <= cutoffValue].
+    self clearUsedIndicatorsOnRecentRounds.
+    self assignRankIndicatorsTo: usedRounds.
+    ^usedRounds! !
 
 
 
 !WorldHandicapRound class methods !
-
+   
 fromTabLine: aString 
 
     | fields round key value pair dateField |
-    #CodeTrackerBlock.  "Last Modified  17:14:14 07/26/25"
+    #CodeTrackerBlock.  "Last Modified  16:54:06 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -1491,7 +1622,7 @@ fromTabLine: aString
     round := self new.
     dateField := nil.
     fields do: [:field |
-        pair := field asArrayOfSubstringsSeparatedBy: (Character value: 61). "equals sign ="
+        pair := field asArrayOfSubstringsSeparatedBy: (Character value: 61). "equals sign"
         pair size = 2
             ifTrue:[
                 key := pair first.
@@ -1519,7 +1650,7 @@ fromTabLine: aString
 
 
 !WorldHandicapRound class methods !
-   
+ 
 includeClass
 
 		"This method informs CodeTracker what tracks this class belongs to."
@@ -1588,44 +1719,6 @@ assignDayOfWeek
 
 !WorldHandicapRound methods !
    
-calculateHandicapIndexForRounds: roundCollection 
-
-	 "Calculate Handicap Index for either:
-		- The main grid (pass all recent rounds)
-		- The course grid (pass only rounds for a specific course/tee)"
-    | numRounds bestRounds deduction sortedByDiff avgHandicapIndex cutoffValue usedRounds |
-    #CodeTrackerBlock.  "Last Modified  17:12:03 07/26/25"
-    #LabWare. "Owner"
-    #?. "Type"
-    #?. "Project"
-    #WorldHandicap. "Module"
-    #?. "Unit"
-    #SS5. "RevisedBy"
-    #NotReviewed. "ReviewedBy"
-    #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
-
-    numRounds := roundCollection size.
-    numRounds < 3
-        ifTrue:[^'N.H.'].
-    bestRounds := self numUsedBasedOn: numRounds.
-    deduction := self handicapIndexDeductionForRoundCount: numRounds.
-    sortedByDiff := roundCollection asSortedCollection: [:a :b |
-        a roundDifferential < b roundDifferential].
-
-	 "Find cutoff differential for the Nth best (to include ties), but prevent out-of-bounds"
-    bestRounds > sortedByDiff size
-        ifTrue:[bestRounds := sortedByDiff size].
-    cutoffValue := (sortedByDiff at: bestRounds) roundDifferential.
-    usedRounds := sortedByDiff select: [:r | r roundDifferential <= cutoffValue].
-    avgHandicapIndex := (
-        (usedRounds inject: 0 into: [:acc :each | acc + each roundDifferential]) / usedRounds size) - deduction.
-    ^avgHandicapIndex roundTo: 0.1! !
-
-
-
-!WorldHandicapRound methods !
-
 courseName
     #CodeTrackerBlock.  "Last Modified  17:13:19 07/26/25"
     #LabWare. "Owner"
@@ -2072,9 +2165,11 @@ rating: aValue
    
 roundDifferential
 
-	"Calculate and return the differential for this round"
+	  "Calculate and return the differential for this round"
+
+	  "Returns nil if any field is missing, not a number, or if slope is 0. Only returns a value if all are valid"
     | s r sl |
-    #CodeTrackerBlock.  "Last Modified  18:45:58 07/26/25"
+    #CodeTrackerBlock.  "Last Modified  18:11:19 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -2088,7 +2183,7 @@ roundDifferential
     s := self score.
     r := self rating.
     sl := self slope.
-    ((s isNumber and: [r isNumber]) and: [sl isNumber])
+    ((s isNumber and: [r isNumber and: [sl isNumber and: [sl ~= 0]]]))
         ifTrue:[^(((s - r) * 113) / sl) roundTo: 0.1]
         ifFalse:[^nil].! !
 
@@ -2362,7 +2457,7 @@ wbBasicVersion
 
 	"Private - Answer the WindowBuilder Pro version.
 		Generated in: Visual Smalltalk 3.1.0 Win32"
-    #CodeTrackerBlock.  "Last Modified  19:34:27 07/28/25"
+    #CodeTrackerBlock.  "Last Modified  15:30:50 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -2409,10 +2504,8 @@ cancelButtonClicked
 
 !WorldHandicapRoundEditDialog methods !
  
-courseComboChanged
-
-    | selectedCourse |
-    #CodeTrackerBlock.  "Last Modified  21:23:15 07/28/25"
+clearTeeDetailsFields
+    #CodeTrackerBlock.  "Last Modified  13:49:05 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -2423,11 +2516,57 @@ courseComboChanged
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
-    "Callback for the #changed: event in courseCombo [WideEnhancedComboBox].
+    (self paneNamed: 'parField') value: ''.
+    (self paneNamed: 'ratingField') value: ''.
+    (self paneNamed: 'slopeField') value: ''.! !
 
-		 (Generated by WindowBuilder Pro)"
-    selectedCourse := (self paneNamed: 'courseCombo') selection.
+
+
+!WorldHandicapRoundEditDialog methods !
+  
+clearTeesCombo
+    #CodeTrackerBlock.  "Last Modified  13:44:51 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    (self paneNamed: 'teesCombo') contents: ''.
+    (self paneNamed: 'teesCombo') value: nil.! !
+
+
+
+!WorldHandicapRoundEditDialog methods !
+ 
+courseComboChanged
+
+"Callback for the #changed: event in courseCombo [WideEnhancedComboBox].
+
+								(Generated by WindowBuilder Pro)"
+
+"Callback for #textCahnged: event."
+    | selectedCourse |
+    #CodeTrackerBlock.  "Last Modified  15:34:23 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    selectedCourse := (self paneNamed: 'courseCombo') value.
     self populateTeesComboForCourse: selectedCourse.
+    (self paneNamed: 'parField') value: ''.
+    (self paneNamed: 'ratingField') value: ''.
+    (self paneNamed: 'slopeField') value: ''.
     unsaved := true.! !
 
 
@@ -2441,7 +2580,7 @@ createViews
 	the WindowBuilder API will probably be lost the next time 
 	you save your layout definition."
     | cancelButton courseCombo dateField differField editButton mainView parField pccField ratingField saveButton scoreField segoeUI10 segoeUI8 slopeField staticText1 staticText10 staticText2 staticText3 staticText4 staticText5 staticText6 staticText7 staticText8 staticText9 teesCombo typeDropdown xDU yDU |
-    #CodeTrackerBlock.  "Last Modified  19:34:27 07/28/25"
+    #CodeTrackerBlock.  "Last Modified  15:30:50 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -2530,7 +2669,8 @@ createViews
     courseCombo "WideEnhancedComboBox"
         owner: self;
         setName: 'courseCombo';
-        when: #changed: send: #courseComboChanged to: self;
+        when: #select send: #courseComboChanged to: self;
+        when: #textChanged: send: #courseComboChanged to: self;
         framingBlock: (
             LayoutFrame new
                  leftRatio: 0;
@@ -2901,7 +3041,8 @@ createViews
     teesCombo "WideEnhancedComboBox"
         owner: self;
         setName: 'teesCombo';
-        when: #changed: send: #teesComboChanged to: self;
+        when: #select send: #teesComboChanged to: self;
+        when: #textChanged: send: #teesComboChanged to: self;
         framingBlock: (
             LayoutFrame new
                  leftRatio: 0;
@@ -2944,9 +3085,9 @@ editButton
    
 fieldChanged
 
-	"Callback for the #changed: event in typeDropdown [DropDownList].
-		(Generated by WindowBuilder Pro)"
-    #CodeTrackerBlock.  "Last Modified  14:57:39 07/28/25"
+								"Callback for the #changed: event in typeDropdown [DropDownList].
+																(Generated by WindowBuilder Pro)"
+    #CodeTrackerBlock.  "Last Modified  17:18:58 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -2967,7 +3108,7 @@ fieldChanged
 
 
 !WorldHandicapRoundEditDialog methods !
-
+   
 initWindow
     #CodeTrackerBlock.  "Last Modified  17:19:58 07/28/25"
     #LabWare. "Owner"
@@ -2989,8 +3130,26 @@ initWindow
 
 !WorldHandicapRoundEditDialog methods !
 
-openOn: aRound
-    #CodeTrackerBlock.  "Last Modified  17:17:43 07/28/25"
+isKnownCourse: aCourse
+    #CodeTrackerBlock.  "Last Modified  13:44:29 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    ^(self paneNamed: 'courseCombo') contents includes: aCourse! !
+
+
+
+!WorldHandicapRoundEditDialog methods !
+
+openOn: aRound player: aPlayer
+    #CodeTrackerBlock.  "Last Modified  15:29:46 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -3002,8 +3161,9 @@ openOn: aRound
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
     round := aRound.
+    player := aPlayer.
     self open.
-    (round date isNil or: [round date = '']) "If no date, it's a new round"
+    (round date isNil or: [round date = '']) "no date, a new round"
         ifTrue:[self populateFieldsForNewRound]
         ifFalse:[self populateFieldsFromRound].! !
 
@@ -3011,6 +3171,42 @@ openOn: aRound
 
 !WorldHandicapRoundEditDialog methods !
 
+player
+    #CodeTrackerBlock.  "Last Modified  13:13:32 07/29/25"
+    #LabWare. "Owner"
+    #LIMS. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #None. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    ^player! !
+
+
+
+!WorldHandicapRoundEditDialog methods !
+  
+player: aValue
+    #CodeTrackerBlock.  "Last Modified  13:13:32 07/29/25"
+    #LabWare. "Owner"
+    #LIMS. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #None. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    player := aValue! !
+
+
+
+!WorldHandicapRoundEditDialog methods !
+ 
 populateCourseCombo
 
     | courses |
@@ -3036,7 +3232,7 @@ populateCourseCombo
 populateFieldsForNewRound
 
 	 "date to today for a new round, then populate all UI fields."
-    #CodeTrackerBlock.  "Last Modified  14:59:10 07/27/25"
+    #CodeTrackerBlock.  "Last Modified  17:16:16 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -3049,14 +3245,15 @@ populateFieldsForNewRound
 
     round date: Date today asString.
     round assignDayOfWeek.
-    self populateFieldsFromRound.! !
+    self populateFieldsFromRound.
+    self fieldChanged.! !
 
 
 
 !WorldHandicapRoundEditDialog methods !
   
 populateFieldsFromRound
-    #CodeTrackerBlock.  "Last Modified  18:42:38 07/26/25"
+    #CodeTrackerBlock.  "Last Modified  13:25:06 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -3067,16 +3264,17 @@ populateFieldsFromRound
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
-    (self paneNamed: 'dateField') contents: (round date ifNil: ['']) asString.
+    (self paneNamed: 'dateField') value: (round date ifNil: ['']).
     (self paneNamed: 'courseCombo') value: (round courseName ifNil: ['']).
-    (self paneNamed: 'teesCombo') value: (round tees ifNil: ['']) asString.
+    self populateTeesComboForCourse: (self paneNamed: 'courseCombo') value.
+    (self paneNamed: 'teesCombo') value: (round tees ifNil: ['']).
     (self paneNamed: 'ratingField') value: (round rating ifNil: ['']).
-    (self paneNamed: 'slopeField') contents: (round slope ifNil: ['']).
-    (self paneNamed: 'parField') contents: (round parTees ifNil: ['']).
-    (self paneNamed: 'scoreField') contents: (round score ifNil: ['']).
+    (self paneNamed: 'slopeField') value: (round slope ifNil: ['']).
+    (self paneNamed: 'parField') value: (round parTees ifNil: ['']).
+    (self paneNamed: 'scoreField') value: (round score ifNil: ['']).
     (self paneNamed: 'typeDropdown') value: (round roundType ifNil: ['']).
-    (self paneNamed: 'pccField') contents: (round pcc ifNil: ['']) asString.
-    (self paneNamed: 'differField') contents: (round roundDifferential ifNil: ['']).! !
+    (self paneNamed: 'pccField') value: (round pcc ifNil: ['']).
+    (self paneNamed: 'differField') value: (round roundDifferential ifNil: ['']).! !
 
 
 
@@ -3084,8 +3282,8 @@ populateFieldsFromRound
 
 populateTeesComboForCourse: aCourse 
 
-    | rounds teesDict sortedTees |
-    #CodeTrackerBlock.  "Last Modified  17:54:32 07/28/25"
+    | rounds sortedTees |
+    #CodeTrackerBlock.  "Last Modified  15:28:08 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -3096,27 +3294,15 @@ populateTeesComboForCourse: aCourse
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
-    ((self paneNamed: 'courseCombo') contents includes: aCourse)
+    (self isKnownCourse: aCourse)
         ifFalse:[
-            (self paneNamed: 'teesCombo') contents: #( ).
-            (self paneNamed: 'teesCombo') selection: nil.
+            self clearTeesCombo.
+            self clearTeeDetailsFields.
             ^self].
-
-	"Find all rounds for the selected course."
-    rounds := (round player database rounds select: [:r | r courseName = aCourse]).
-
-	"Build a dictionary of tees -> most recent round for that tees"
-    teesDict := Dictionary new.
-    rounds do: [:r |
-        | existing|existing := teesDict at: r tees ifAbsent: [nil].
-        (existing isNil or: [r date < r date])
-            ifTrue:[teesDict at: r tees put: r]].
-
-	"Sort tees by rating, ascending"
-    sortedTees := (
-        teesDict keys asSortedCollection: [:a :b | (teesDict at: a) rating < (teesDict at: b) rating]).
-    (self paneNamed: 'teesCombo') contents: sortedTees.
-    (self paneNamed: 'teesCombo') selection: round tees.! !
+    rounds := player database uniqueTeesForCourse: aCourse.
+    sortedTees := self sortTeesByRating: rounds.
+    (self paneNamed: 'teesCombo') contents: (sortedTees collect: [:r | r tees]).
+    (self paneNamed: 'teesCombo') value: nil.! !
 
 
 
@@ -3226,13 +3412,8 @@ saved: aValue
 
 !WorldHandicapRoundEditDialog methods !
    
-teesComboChanged
-
-												 "Callback for the #changed: event in teesCombo [WideEnhancedComboBox].
-
-																									(Generated by WindowBuilder Pro)"
-    | roundsForTee mostRecentRound selectedTee selectedCourse tees |
-    #CodeTrackerBlock.  "Last Modified  21:23:35 07/28/25"
+showTeeDetailsFrom: aRound
+    #CodeTrackerBlock.  "Last Modified  18:21:48 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -3243,42 +3424,67 @@ teesComboChanged
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
-    selectedCourse := (self paneNamed: 'courseCombo') selection.
-    self populateTeesComboForCourse: selectedCourse.
+    (self paneNamed: 'parField') value: aRound parTees asString.
+    (self paneNamed: 'ratingField') value: aRound rating asString.
+    (self paneNamed: 'slopeField') value: aRound slope asString.
+    self fieldChanged.! !
 
-		"Get the list of tees for the course"
-    tees := (self paneNamed: 'teesCombo') contents.
-    selectedTee := (tees isEmpty)
-        ifTrue:[nil]
-        ifFalse:[tees first].
 
-		"Set the selection in the tees combo"
-    (self paneNamed: 'teesCombo') value: selectedTee.
 
-		"Find rounds for this course and tee"
-    roundsForTee := (
-        round player database rounds select: [:r |
-            r courseName = selectedCourse and: [r tees = selectedTee]]).
+!WorldHandicapRoundEditDialog methods !
+ 
+sortTeesByRating: rounds
+    #CodeTrackerBlock.  "Last Modified  13:45:23 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
-		"Pick the most recent"
-    mostRecentRound := roundsForTee isEmpty
-        ifTrue:[nil]
-        ifFalse:[
-            (roundsForTee asSortedCollection: [:a :b | (Date fromString: a date) > (Date fromString: b date)]) first].
+    ^rounds asSortedCollection: [:a :b |
+        (a rating isNil and: [b rating notNil])
+            ifTrue:[false]
+            ifFalse:[
+                (a rating notNil and: [b rating isNil])
+                    ifTrue:[true]
+                    ifFalse:[a rating < b rating]]].! !
 
-		"Update round object and UI fields"
+
+
+!WorldHandicapRoundEditDialog methods !
+   
+teesComboChanged
+
+"Callback for the #changed: event in teesCombo [WideEnhancedComboBox]. (Generated by WindowBuilder Pro)"
+
+"Callback for #textCahnged: event"
+    | mostRecentRound selectedCourse selectedTee teeList |
+    #CodeTrackerBlock.  "Last Modified  15:43:54 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    selectedCourse := (self paneNamed: 'courseCombo') value.
+    selectedTee := (self paneNamed: 'teesCombo') value.
+    teeList := (self paneNamed: 'teesCombo') contents.
+
+	 "user typed a tee,	clear details."
+    (selectedTee isNil | selectedTee isEmpty | (teeList includes: selectedTee) not)
+        ifTrue:[^self clearTeeDetailsFields].
+    mostRecentRound := player database mostRecentRoundForCourse: selectedCourse tee: selectedTee player: player.
     mostRecentRound isNil
-        ifTrue:[
-            round parTees: nil.
-            round rating: nil.
-            round slope: nil.]
-        ifFalse:[
-            round parTees: mostRecentRound parTees.
-            round rating: mostRecentRound rating.
-            round slope: mostRecentRound slope.].
-    self populateFieldsFromRound.
-    self fieldChanged.
-    unsaved := true.! !
+        ifTrue:[self clearTeeDetailsFields]
+        ifFalse:[self showTeeDetailsFrom: mostRecentRound].! !
 
 
 
@@ -3975,10 +4181,10 @@ currentPlayer: aValue
   
 deleteRound
 
-	"Callback for the menu item titled 'Delete Round'.
-	 (Generated by WindowBuilder)"
+		"Callback for the menu item titled 'Delete Round'.
+		 (Generated by WindowBuilder)"
     | selectedRound userConfirmed |
-    #CodeTrackerBlock.  "Last Modified  14:00:06 07/27/25"
+    #CodeTrackerBlock.  "Last Modified  16:07:23 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -3989,6 +4195,10 @@ deleteRound
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
+    (self ensurePlayerSelected)
+        ifFalse:[^self].
+    (self ensureRoundSelected)
+        ifFalse:[^self].
     selectedRound := (self paneNamed: 'mainGrid') selectedItem.
     userConfirmed := MessageBox confirmWithCancel: 'Do you really want to delete the round of ' , selectedRound score asString , ' on ' , selectedRound date asString , '?'.
     userConfirmed
@@ -4000,13 +4210,13 @@ deleteRound
 
 
 !WorldHandicapSystemUI methods !
-
+ 
 editRound
 
-	  "Callback for the menu item titled 'Edit Round'.
-		(Generated by WindowBuilder)"
+	 "Callback for the menu item titled 'Edit Round'.
+	 (Generated by WindowBuilder)"
     | dialog |
-    #CodeTrackerBlock.  "Last Modified  15:11:46 07/27/25"
+    #CodeTrackerBlock.  "Last Modified  15:59:58 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -4017,8 +4227,12 @@ editRound
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
+    (self ensurePlayerSelected)
+        ifFalse:[^self].
+    (self ensureRoundSelected)
+        ifFalse:[^self].
     dialog := WorldHandicapRoundEditDialog new.
-    dialog openOn: self selectedRound.
+    dialog openOn: self selectedRound player: self currentPlayer.
     (dialog wasSaved)
         ifTrue:[
             self updateAfterRoundsChanged.
@@ -4027,7 +4241,75 @@ editRound
 
 
 !WorldHandicapSystemUI methods !
+ 
+ensureCourseSelected
 
+	"true if a course is selected, otherwise shows an alert."
+    #CodeTrackerBlock.  "Last Modified  15:54:02 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    (self selectedCourse isNil or: [self selectedCourse isEmpty])
+        ifTrue:[
+            MessageBox message: 'You must select a course first.'.
+            ^false].
+    ^true! !
+
+
+
+!WorldHandicapSystemUI methods !
+  
+ensurePlayerSelected
+    #CodeTrackerBlock.  "Last Modified  15:51:12 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    (self currentPlayer isNil)
+        ifTrue:[
+            MessageBox message: 'You must create or load a player (.ghin file) first.'.
+            ^false].
+    ^true! !
+
+
+
+!WorldHandicapSystemUI methods !
+  
+ensureRoundSelected
+    #CodeTrackerBlock.  "Last Modified  16:01:28 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    (self selectedRound isNil)
+        ifTrue:[
+            MessageBox message: 'You must select/create a round first.'.
+            ^false].
+    ^true! !
+
+
+
+!WorldHandicapSystemUI methods !
+  
 exitProgram
     #CodeTrackerBlock.  "Last Modified  14:03:17 07/27/25"
     #LabWare. "Owner"
@@ -4083,7 +4365,7 @@ fileExit
 fileOpen
 
     | fileName db player |
-    #CodeTrackerBlock.  "Last Modified  14:08:25 07/27/25"
+    #CodeTrackerBlock.  "Last Modified  16:06:32 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -4096,27 +4378,19 @@ fileOpen
 
     fileName := FileDialog getFilePrompt: 'Select a GHIN file' default: '*.ghin'.
     (fileName isNil or: [fileName isEmpty])
-        ifFalse:[
-            db := WorldHandicapDatabase new.
-            player := db loadFromGhinFile: fileName.
-            self currentPlayer: player.
-            player database: db.
-            db rounds do: [:round |
-                round player: player.
-                round database: db.
-                round assignDayOfWeek].
-            db assignRoundNumber.
-            db assignDaysPassed.
-            player usedRoundsRanking.
-            (self paneNamed: 'mainGrid') contents: db sortRoundsByDate.
-            self populateCourseGridFromMainGrid.
-            self populatePlayerFields.
-            unsaved := false].! !
+        ifTrue:[^self].
+    db := WorldHandicapDatabase new.
+    player := db loadFromGhinFile: fileName.
+    self currentPlayer: player.
+    player database: db.
+    self initializeRoundsFor: db player: player.
+    self refreshAllAfterPlayerAndRoundsLoaded: db player: player.
+    unsaved := false.! !
 
 
 
 !WorldHandicapSystemUI methods !
- 
+
 fileSave
 
 	"Callback for the menu item titled 'Save...'.
@@ -4143,6 +4417,27 @@ fileSave
 
 !WorldHandicapSystemUI methods !
  
+initializeRoundsFor: db player: player
+    #CodeTrackerBlock.  "Last Modified  16:04:50 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    db rounds do: [:round |
+        round player: player.
+        round database: db.
+        round assignDayOfWeek].! !
+
+
+
+!WorldHandicapSystemUI methods !
+  
 initWindow
     #CodeTrackerBlock.  "Last Modified  13:13:09 07/21/25"
     #LabWare. "Owner"
@@ -4190,9 +4485,9 @@ newPlayer
    
 newRound
 
-	"Callback for the menu item titled 'New Round'.
-	 (Generated by WindowBuilder)"
-    #CodeTrackerBlock.  "Last Modified  15:15:02 07/27/25"
+	 "Callback for the menu item titled 'New Round'.
+	  (Generated by WindowBuilder)"
+    #CodeTrackerBlock.  "Last Modified  15:52:18 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -4203,17 +4498,19 @@ newRound
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
+    (self ensurePlayerSelected)
+        ifFalse:[^self].
     self openNewRoundEditorWith: nil tee: nil score: nil.! !
 
 
 
 !WorldHandicapSystemUI methods !
-  
+ 
 newRoundMenubar
 
-		"Callback for the menu item titled 'New Round'.
-								 (Generated by WindowBuilder)"
-    #CodeTrackerBlock.  "Last Modified  15:15:33 07/27/25"
+		  "Callback for the menu item titled 'New Round'.
+											(Generated by WindowBuilder)"
+    #CodeTrackerBlock.  "Last Modified  15:52:30 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -4224,17 +4521,19 @@ newRoundMenubar
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
+    (self ensurePlayerSelected)
+        ifFalse:[^self].
     self openNewRoundEditorWith: nil tee: nil score: nil.! !
 
 
 
 !WorldHandicapSystemUI methods !
-   
+
 newRoundOnCourse
 
 	"Callback for the menu item titled 'New Round on Selected Course'.
 	 (Generated by WindowBuilder)"
-    #CodeTrackerBlock.  "Last Modified  15:06:36 07/27/25"
+    #CodeTrackerBlock.  "Last Modified  15:54:34 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -4245,17 +4544,21 @@ newRoundOnCourse
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
+    (self ensurePlayerSelected)
+        ifFalse:[^self].
+    (self ensureCourseSelected)
+        ifFalse:[^self].
     self openNewRoundEditorWith: self selectedCourse tee: self selectedTee score: nil.! !
 
 
 
 !WorldHandicapSystemUI methods !
-  
+
 openNewRoundEditorWith: aCourse tee: aTee score: aScore 
 
-				"handles creating a new round from the grid or the menu bar, and can open a new round on a selected course with course, tee, and score"
+								"handles creating a new round from the grid or the menu bar, and can open a new round on a selected course with course, tee, and score"
     | player db newRound dialog |
-    #CodeTrackerBlock.  "Last Modified  19:24:23 07/28/25"
+    #CodeTrackerBlock.  "Last Modified  15:48:38 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -4271,14 +4574,14 @@ openNewRoundEditorWith: aCourse tee: aTee score: aScore
     newRound := WorldHandicapRound new.
     newRound player: player.
     newRound database: db.
+    newRound date: Date today asString.
     aCourse isNil
         ifFalse:[newRound courseName: aCourse].
     aTee isNil
         ifFalse:[newRound tees: aTee].
     newRound score: (aScore ifNil: ['']).
-    newRound date: Date today asString.
     dialog := WorldHandicapRoundEditDialog new.
-    dialog openOn: newRound.
+    dialog openOn: newRound player: player.
     dialog populateFieldsForNewRound.
     (dialog wasSaved)
         ifTrue:[
@@ -4290,7 +4593,7 @@ openNewRoundEditorWith: aCourse tee: aTee score: aScore
 
 
 !WorldHandicapSystemUI methods !
-   
+
 populateCourseGridFromMainGrid
 
     | mainGridRounds seenCombos courseRows |
@@ -4369,6 +4672,31 @@ populateRoundsGrid
 
 !WorldHandicapSystemUI methods !
 
+refreshAllAfterPlayerAndRoundsLoaded: db player: player 
+
+	"Updates round numbers, days passed, used round rankings, and refreshes both the main and course grids and player info fields after loading a player and their rounds from file."
+    #CodeTrackerBlock.  "Last Modified  16:06:07 07/29/25"
+    #LabWare. "Owner"
+    #?. "Type"
+    #?. "Project"
+    #WorldHandicap. "Module"
+    #?. "Unit"
+    #SS5. "RevisedBy"
+    #NotReviewed. "ReviewedBy"
+    #?. "LabTrackId"
+    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+
+    db assignRoundNumber.
+    db assignDaysPassed.
+    player usedRoundsRanking.
+    (self paneNamed: 'mainGrid') contents: db sortRoundsByDate.
+    self populateCourseGridFromMainGrid.
+    self populatePlayerFields.! !
+
+
+
+!WorldHandicapSystemUI methods !
+ 
 saveToFile: fileName 
 
     | fileStream player |
@@ -4403,7 +4731,9 @@ saveToFile: fileName
 !WorldHandicapSystemUI methods !
   
 selectedCourse
-    #CodeTrackerBlock.  "Last Modified  15:10:21 07/27/25"
+
+    | selected |
+    #CodeTrackerBlock.  "Last Modified  15:57:27 07/29/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -4414,12 +4744,15 @@ selectedCourse
     #?. "LabTrackId"
     #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
 
-    ^(self paneNamed: 'mainGrid') selectedItem courseName! !
+    selected := (self paneNamed: 'mainGrid') selectedItem.
+    selected isNil
+        ifTrue:[^nil].
+    ^selected courseName! !
 
 
 
 !WorldHandicapSystemUI methods !
- 
+  
 selectedRound
     #CodeTrackerBlock.  "Last Modified  15:11:33 07/27/25"
     #LabWare. "Owner"
