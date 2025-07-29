@@ -1,4 +1,3 @@
-
 WindowDialog subclass: #WorldHandicapNewPlayerDialog
   instanceVariableNames: 
     ' saved unsaved newPlayer entryName entryGhin '
@@ -48,7 +47,7 @@ includeClass
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^true! !
 
@@ -67,7 +66,7 @@ assignDaysPassed
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     sortedRounds := self sortRoundsByDate.
     reversedRounds := sortedRounds asArray reversed.
@@ -99,7 +98,7 @@ assignRoundNumber
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     sortedRounds := self sortRoundsByDate.
     num := 1.
@@ -123,7 +122,7 @@ loadFromGhinFile: fileName
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     fileStream := File pathNameReadOnly: fileName.
     player := WorldHandicapPlayer new.
@@ -156,7 +155,7 @@ playedCoursesForPlayer: aPlayer
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^(self rounds select: [:r | r player = aPlayer] collect: [:r | r courseName]) asSet asSortedCollection.! !
 
@@ -176,7 +175,7 @@ playedTeesForCourse: aCourse player: aPlayer
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     selectedRounds := (self rounds select: [:r | r player = aPlayer and: [r courseName = aCourse]]).
     teesDict := Dictionary new.
@@ -210,7 +209,7 @@ recentTwentyRounds
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     sortedRecent := self sortRoundsByDate.
     n := sortedRecent size min: 20.
@@ -230,7 +229,7 @@ rounds
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     rounds isNil
         ifTrue:[rounds := OrderedCollection new].
@@ -250,7 +249,7 @@ rounds: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     rounds := aValue! !
 
@@ -270,7 +269,7 @@ sortRoundsByDate
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^self rounds asSortedCollection: [:a :b |
         | dateA dateB|dateA := Date fromString: a date.
@@ -296,7 +295,7 @@ includeClass
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^true! !
 
@@ -317,7 +316,7 @@ wbBasicVersion
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^3.11! !
 
@@ -338,7 +337,7 @@ cancelButtonClicked
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     (unsaved = true)
         ifTrue:[
@@ -370,7 +369,7 @@ createViews
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     #generated.
     xDU := (SysFont width + 1 roundTo: 2) / (SysFont width roundTo: 2).
@@ -529,7 +528,7 @@ entryGhin
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^entryGhin! !
 
@@ -547,7 +546,7 @@ entryGhin: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     entryGhin := aValue! !
 
@@ -565,7 +564,7 @@ entryName
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^entryName! !
 
@@ -583,7 +582,7 @@ entryName: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     entryName := aValue! !
 
@@ -604,7 +603,7 @@ fieldEdited
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     unsaved := true.! !
 
@@ -622,7 +621,7 @@ initWindow
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     super initWindow.! !
 
@@ -643,7 +642,7 @@ isValidGhinFile: aString
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     (aString size = 8)
         ifFalse:[^false].
@@ -681,7 +680,7 @@ markModified
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     unsaved := true.! !
 
@@ -699,7 +698,7 @@ newPlayer
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^newPlayer! !
 
@@ -717,7 +716,7 @@ newPlayer: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     newPlayer := aValue! !
 
@@ -735,7 +734,7 @@ openOn
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     saved := false.
     newPlayer := nil.
@@ -759,7 +758,7 @@ saveButtonClicked
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     name := (self paneNamed: 'playerNameEntry') contents asString.
     ghin := (self paneNamed: 'ghinNumberEntry') contents asString.
@@ -799,7 +798,7 @@ saved
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^saved! !
 
@@ -817,7 +816,7 @@ saved: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     saved := aValue! !
 
@@ -835,7 +834,7 @@ unsaved
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^unsaved! !
 
@@ -853,7 +852,7 @@ unsaved: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     unsaved := aValue! !
 
@@ -871,7 +870,7 @@ views
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^views! !
 
@@ -889,7 +888,7 @@ views: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     views := aValue! !
 
@@ -907,7 +906,7 @@ warningMessage
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^MessageBox confirmWithCancel: 'You have unsaved changes. 
 Are you sure you want to cancel?'! !
@@ -926,7 +925,7 @@ wasSaved
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^saved = true.! !
 
@@ -946,7 +945,7 @@ fromLine: aString into: aPlayer
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     pair := aString asArrayOfSubstringsSeparatedBy: (Character value: 61). "equals sign ="
     pair size = 2
@@ -971,7 +970,7 @@ getGhinFromFileName: fileName
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^((fileName asArrayOfSubstringsSeparatedBy: $\) last) copyUpTo: '.'! !
 
@@ -991,7 +990,7 @@ includeClass
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^true! !
 
@@ -1009,7 +1008,7 @@ database
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^database! !
 
@@ -1027,7 +1026,7 @@ database: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     database := aValue! !
 
@@ -1045,7 +1044,7 @@ displayHandicapIndex: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     (aValue isNumber)
         ifFalse:[^aValue].
@@ -1067,7 +1066,7 @@ ghinNumber
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^ghinNumber! !
 
@@ -1085,7 +1084,7 @@ ghinNumber: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ghinNumber := aValue! !
 
@@ -1105,7 +1104,7 @@ handicapIndexDeductionForRoundCount: roundCount
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     roundCount = 6
         ifTrue:[^1.0].
@@ -1132,7 +1131,7 @@ handicapIndexForCourse: aCourse tee: aTee
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     courseRounds := self playerRecentTwentyRounds select: [:r |
         (r courseName = aCourse) and: (r tees = aTee)].
@@ -1154,7 +1153,7 @@ handicapIndexForRounds: roundCollection
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     numRounds := roundCollection size.
     numRounds < 3
@@ -1187,7 +1186,7 @@ maxAfterNext
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^self maxAfterSimulatedRounds: 1! !
 
@@ -1208,7 +1207,7 @@ maxAfterSimulatedRounds: count
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     recentRounds := self playerRecentTwentyRounds copy.
     simulatedRounds := OrderedCollection new.
@@ -1236,7 +1235,7 @@ maxAfterThree
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^self maxAfterSimulatedRounds: 3! !
 
@@ -1254,7 +1253,7 @@ maxAfterTwo
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^self maxAfterSimulatedRounds: 2! !
 
@@ -1274,7 +1273,7 @@ numUsedBasedOn: count
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     count >= 20
         ifTrue:[^8].
@@ -1314,7 +1313,7 @@ playedCourses
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^database playedCoursesForPlayer: self! !
 
@@ -1332,7 +1331,7 @@ playedTeesForCourse: aCourse
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^database playedTeesForCourse: aCourse player: self! !
 
@@ -1350,7 +1349,7 @@ playerName
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^playerName! !
 
@@ -1368,7 +1367,7 @@ playerName: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     playerName := aValue! !
 
@@ -1386,7 +1385,7 @@ playerRecentTwentyRounds
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^self database recentTwentyRounds! !
 
@@ -1408,7 +1407,7 @@ simulateWorstCaseRoundWithDate: aDate
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     round := WorldHandicapRound new.
     round player: self.
@@ -1439,7 +1438,7 @@ usedRoundsRanking
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     self playerRecentTwentyRounds isEmpty
         ifTrue:[^nil]. "player may not have rounds yet"
@@ -1486,7 +1485,7 @@ fromTabLine: aString
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     fields := aString asArrayOfSubstringsDelimitedBy: Character tab.
     round := self new.
@@ -1533,7 +1532,7 @@ includeClass
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^true! !
 
@@ -1553,7 +1552,7 @@ abbrevDayNameForDate: aDate
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     dayName := aDate dayName.
     ^dayName size > 2
@@ -1576,7 +1575,7 @@ assignDayOfWeek
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     aDate := self dateString.
     aDate isNil
@@ -1604,7 +1603,7 @@ calculateHandicapIndexForRounds: roundCollection
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     numRounds := roundCollection size.
     numRounds < 3
@@ -1637,7 +1636,7 @@ courseName
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^courseName! !
 
@@ -1655,7 +1654,7 @@ courseName: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     courseName := aValue! !
 
@@ -1673,7 +1672,7 @@ database
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^database! !
 
@@ -1691,7 +1690,7 @@ database: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     database := aValue! !
 
@@ -1709,7 +1708,7 @@ date
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^date! !
 
@@ -1727,7 +1726,7 @@ date: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     date := aValue! !
 
@@ -1747,7 +1746,7 @@ dateString
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     dateParts := self date asArrayOfSubstringsSeparatedBy: $/.
     (dateParts size = 3)
@@ -1771,7 +1770,7 @@ dayOfWeek
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^dayOfWeek! !
 
@@ -1789,7 +1788,7 @@ dayOfWeek: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     dayOfWeek := aValue! !
 
@@ -1807,7 +1806,7 @@ daysPassed
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^daysPassed! !
 
@@ -1825,7 +1824,7 @@ daysPassed: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     daysPassed := aValue! !
 
@@ -1843,7 +1842,7 @@ displayColor
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     self isUsed
         ifTrue:[^Color blue].
@@ -1865,7 +1864,7 @@ index
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^self player handicapIndexForCourse: self courseName tee: self tees! !
 
@@ -1883,7 +1882,7 @@ isOutsideRecent
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^self isRecent not! !
 
@@ -1901,7 +1900,7 @@ isRecent
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^(self database recentTwentyRounds includes: self)! !
 
@@ -1919,7 +1918,7 @@ isUsed
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^self usedIndicator notEmpty! !
 
@@ -1937,7 +1936,7 @@ parTees
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^parTees! !
 
@@ -1955,7 +1954,7 @@ parTees: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     parTees := aValue! !
 
@@ -1973,7 +1972,7 @@ pcc
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^pcc! !
 
@@ -1991,7 +1990,7 @@ pcc: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     pcc := aValue! !
 
@@ -2009,7 +2008,7 @@ player
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^player! !
 
@@ -2027,7 +2026,7 @@ player: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     player := aValue! !
 
@@ -2045,7 +2044,7 @@ rating
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^rating! !
 
@@ -2063,7 +2062,7 @@ rating: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     rating := aValue! !
 
@@ -2084,7 +2083,7 @@ roundDifferential
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     s := self score.
     r := self rating.
@@ -2107,7 +2106,7 @@ roundNumber
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^roundNumber! !
 
@@ -2125,7 +2124,7 @@ roundNumber: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     roundNumber := aValue! !
 
@@ -2143,7 +2142,7 @@ roundType
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^roundType! !
 
@@ -2161,7 +2160,7 @@ roundType: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     roundType := aValue! !
 
@@ -2179,7 +2178,7 @@ score
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^score! !
 
@@ -2197,7 +2196,7 @@ score: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     score := aValue! !
 
@@ -2215,7 +2214,7 @@ slope
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^slope! !
 
@@ -2233,7 +2232,7 @@ slope: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     slope := aValue! !
 
@@ -2253,7 +2252,7 @@ strokes
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     hi := self player handicapIndexForCourse: self courseName tee: self tees.
     (hi isNumber)
@@ -2277,7 +2276,7 @@ tees
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^tees! !
 
@@ -2295,7 +2294,7 @@ tees: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     tees := aValue! !
 
@@ -2313,7 +2312,7 @@ usedIndicator
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^usedIndicator! !
 
@@ -2331,7 +2330,7 @@ usedIndicator: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     usedIndicator := aValue! !
 
@@ -2351,7 +2350,7 @@ includeClass
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^true! !
 
@@ -2363,7 +2362,7 @@ wbBasicVersion
 
 	"Private - Answer the WindowBuilder Pro version.
 		Generated in: Visual Smalltalk 3.1.0 Win32"
-    #CodeTrackerBlock.  "Last Modified  17:12:22 07/28/25"
+    #CodeTrackerBlock.  "Last Modified  19:34:27 07/28/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -2372,7 +2371,7 @@ wbBasicVersion
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^3.11! !
 
@@ -2384,7 +2383,7 @@ cancelButtonClicked
 
 	"Callback for the #clicked event in cancelButton [Button].
 		(Generated by WindowBuilder Pro)"
-    #CodeTrackerBlock.  "Last Modified  14:50:52 07/27/25"
+    #CodeTrackerBlock.  "Last Modified  19:44:20 07/28/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -2393,9 +2392,9 @@ cancelButtonClicked
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
-    (unsaved = true)
+    (unsaved := true)
         ifTrue:[
             (self warningMessage)
                 ifTrue:[
@@ -2409,11 +2408,11 @@ cancelButtonClicked
 
 
 !WorldHandicapRoundEditDialog methods !
-  
+ 
 courseComboChanged
 
-    | selectedCourse tees |
-    #CodeTrackerBlock.  "Last Modified  14:38:48 07/28/25"
+    | selectedCourse |
+    #CodeTrackerBlock.  "Last Modified  21:23:15 07/28/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -2422,29 +2421,19 @@ courseComboChanged
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     "Callback for the #changed: event in courseCombo [WideEnhancedComboBox].
-	   (Generated by WindowBuilder Pro)"
-    selectedCourse := (self paneNamed: 'courseCombo') value asString.
 
-	"If selectedCourse is in the list, populate Tees Combo"
-    ((self paneNamed: 'courseCombo') contents includes: selectedCourse)
-        ifTrue:[
-            tees := round player playedTeesForCourse: selectedCourse.
-            (self paneNamed: 'teesCombo') contents: tees.
-            (self paneNamed: 'teesCombo') value: (tees first ifNil: ['']).]
-        ifFalse:[
-
-			"Course was entered manually; empty tees combo"
-            (self paneNamed: 'teesCombo') contents: #( ).
-            (self paneNamed: 'teesCombo') value: ''.].
+		 (Generated by WindowBuilder Pro)"
+    selectedCourse := (self paneNamed: 'courseCombo') selection.
+    self populateTeesComboForCourse: selectedCourse.
     unsaved := true.! !
 
 
 
 !WorldHandicapRoundEditDialog methods !
-  
+
 createViews
 
 	"WARNING!! This method was automatically generated by 
@@ -2452,7 +2441,7 @@ createViews
 	the WindowBuilder API will probably be lost the next time 
 	you save your layout definition."
     | cancelButton courseCombo dateField differField editButton mainView parField pccField ratingField saveButton scoreField segoeUI10 segoeUI8 slopeField staticText1 staticText10 staticText2 staticText3 staticText4 staticText5 staticText6 staticText7 staticText8 staticText9 teesCombo typeDropdown xDU yDU |
-    #CodeTrackerBlock.  "Last Modified  17:12:22 07/28/25"
+    #CodeTrackerBlock.  "Last Modified  19:34:27 07/28/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -2461,7 +2450,7 @@ createViews
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     #generated.
     xDU := (SysFont width + 1 roundTo: 2) / (SysFont width roundTo: 2).
@@ -2556,25 +2545,6 @@ createViews
         noTabStop;
         font: segoeUI10.
     mainView addSubpane: courseCombo.
-    teesCombo "WideEnhancedComboBox"
-        owner: self;
-        setName: 'teesCombo';
-        when: #changed send: #teesComboChanged to: self;
-        when: #changed: send: #teesComboChanged to: self;
-        framingBlock: (
-            LayoutFrame new
-                 leftRatio: 0;
-                 leftInset: 76 * xDU;
-                 topRatio: 0;
-                 topInset: 1312 / 19 * yDU;
-                 rightRatio: 0;
-                 rightInset: -136 * xDU;
-                 bottomRatio: 0;
-                 bottomInset: -1536 / 19 * yDU);
-        startGroup;
-        noTabStop;
-        font: segoeUI10.
-    mainView addSubpane: teesCombo.
     typeDropdown "DropDownList"
         owner: self;
         setName: 'typeDropdown';
@@ -2927,12 +2897,30 @@ createViews
         startGroup;
         noTabStop;
         font: segoeUI8.
-    mainView addSubpane: cancelButton! !
+    mainView addSubpane: cancelButton.
+    teesCombo "WideEnhancedComboBox"
+        owner: self;
+        setName: 'teesCombo';
+        when: #changed: send: #teesComboChanged to: self;
+        framingBlock: (
+            LayoutFrame new
+                 leftRatio: 0;
+                 leftInset: 76 * xDU;
+                 topRatio: 0;
+                 topInset: 1296 / 19 * yDU;
+                 rightRatio: 0;
+                 rightInset: -136 * xDU;
+                 bottomRatio: 0;
+                 bottomInset: -80 * yDU);
+        startGroup;
+        noTabStop;
+        font: segoeUI10.
+    mainView addSubpane: teesCombo! !
 
 
 
 !WorldHandicapRoundEditDialog methods !
-
+ 
 editButton
 
     | selectedDate |
@@ -2945,7 +2933,7 @@ editButton
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     selectedDate := CalendarDialog openOn: round date.
     selectedDate ifNotNil: [(self paneNamed: 'dateField') contents: selectedDate date.].! !
@@ -2967,7 +2955,7 @@ fieldChanged
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     round parTees: (self paneNamed: 'parField') contents asInteger.
     round rating: (self paneNamed: 'ratingField') contents asFloat.
@@ -2990,7 +2978,7 @@ initWindow
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     super initWindow.
     self populateCourseCombo.
@@ -3011,7 +2999,7 @@ openOn: aRound
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     round := aRound.
     self open.
@@ -3035,7 +3023,7 @@ populateCourseCombo
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     courses := (round player database rounds collect: [:r | r courseName]) asSet asSortedCollection.
     (self paneNamed: 'courseCombo') contents: courses.
@@ -3057,7 +3045,7 @@ populateFieldsForNewRound
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     round date: Date today asString.
     round assignDayOfWeek.
@@ -3077,7 +3065,7 @@ populateFieldsFromRound
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     (self paneNamed: 'dateField') contents: (round date ifNil: ['']) asString.
     (self paneNamed: 'courseCombo') value: (round courseName ifNil: ['']).
@@ -3094,8 +3082,10 @@ populateFieldsFromRound
 
 !WorldHandicapRoundEditDialog methods !
 
-populateTeesComboForCourse: aCourse
-    #CodeTrackerBlock.  "Last Modified  16:22:05 07/28/25"
+populateTeesComboForCourse: aCourse 
+
+    | rounds teesDict sortedTees |
+    #CodeTrackerBlock.  "Last Modified  17:54:32 07/28/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -3104,20 +3094,34 @@ populateTeesComboForCourse: aCourse
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ((self paneNamed: 'courseCombo') contents includes: aCourse)
         ifFalse:[
             (self paneNamed: 'teesCombo') contents: #( ).
-            (self paneNamed: 'teesCombo') value: ''.
+            (self paneNamed: 'teesCombo') selection: nil.
             ^self].
-    (self paneNamed: 'teesCombo') contents: (round player playedTeesForCourse: aCourse).
-    (self paneNamed: 'teesCombo') value: ((self paneNamed: 'teesCombo') contents first ifNil: ['']).! !
+
+	"Find all rounds for the selected course."
+    rounds := (round player database rounds select: [:r | r courseName = aCourse]).
+
+	"Build a dictionary of tees -> most recent round for that tees"
+    teesDict := Dictionary new.
+    rounds do: [:r |
+        | existing|existing := teesDict at: r tees ifAbsent: [nil].
+        (existing isNil or: [r date < r date])
+            ifTrue:[teesDict at: r tees put: r]].
+
+	"Sort tees by rating, ascending"
+    sortedTees := (
+        teesDict keys asSortedCollection: [:a :b | (teesDict at: a) rating < (teesDict at: b) rating]).
+    (self paneNamed: 'teesCombo') contents: sortedTees.
+    (self paneNamed: 'teesCombo') selection: round tees.! !
 
 
 
 !WorldHandicapRoundEditDialog methods !
- 
+
 round
     #CodeTrackerBlock.  "Last Modified  09:22:33 07/24/25"
     #LabWare. "Owner"
@@ -3128,7 +3132,7 @@ round
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^round! !
 
@@ -3146,7 +3150,7 @@ round: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     round := aValue.
     self populateFieldsFromRound.! !
@@ -3168,7 +3172,7 @@ saveButtonClicked
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     round date: (self paneNamed: 'dateField') value asString.
     round courseName: (self paneNamed: 'courseCombo') value.
@@ -3196,7 +3200,7 @@ saved
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^saved! !
 
@@ -3214,7 +3218,7 @@ saved: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     saved := aValue! !
 
@@ -3224,10 +3228,11 @@ saved: aValue
    
 teesComboChanged
 
-							"Callback for the #changed: event in teesCombo [WideEnhancedComboBox].
-														(Generated by WindowBuilder Pro)"
-    | selectedTee |
-    #CodeTrackerBlock.  "Last Modified  17:46:05 07/28/25"
+												 "Callback for the #changed: event in teesCombo [WideEnhancedComboBox].
+
+																									(Generated by WindowBuilder Pro)"
+    | roundsForTee mostRecentRound selectedTee selectedCourse tees |
+    #CodeTrackerBlock.  "Last Modified  21:23:35 07/28/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -3236,15 +3241,49 @@ teesComboChanged
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
-    selectedTee := (self paneNamed: 'teesCombo') selection.
-    self populateTeesComboForCourse: selectedTee.! !
+    selectedCourse := (self paneNamed: 'courseCombo') selection.
+    self populateTeesComboForCourse: selectedCourse.
+
+		"Get the list of tees for the course"
+    tees := (self paneNamed: 'teesCombo') contents.
+    selectedTee := (tees isEmpty)
+        ifTrue:[nil]
+        ifFalse:[tees first].
+
+		"Set the selection in the tees combo"
+    (self paneNamed: 'teesCombo') value: selectedTee.
+
+		"Find rounds for this course and tee"
+    roundsForTee := (
+        round player database rounds select: [:r |
+            r courseName = selectedCourse and: [r tees = selectedTee]]).
+
+		"Pick the most recent"
+    mostRecentRound := roundsForTee isEmpty
+        ifTrue:[nil]
+        ifFalse:[
+            (roundsForTee asSortedCollection: [:a :b | (Date fromString: a date) > (Date fromString: b date)]) first].
+
+		"Update round object and UI fields"
+    mostRecentRound isNil
+        ifTrue:[
+            round parTees: nil.
+            round rating: nil.
+            round slope: nil.]
+        ifFalse:[
+            round parTees: mostRecentRound parTees.
+            round rating: mostRecentRound rating.
+            round slope: mostRecentRound slope.].
+    self populateFieldsFromRound.
+    self fieldChanged.
+    unsaved := true.! !
 
 
 
 !WorldHandicapRoundEditDialog methods !
-
+   
 unsaved
     #CodeTrackerBlock.  "Last Modified  11:18:45 07/24/25"
     #LabWare. "Owner"
@@ -3255,7 +3294,7 @@ unsaved
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^unsaved! !
 
@@ -3273,7 +3312,7 @@ unsaved: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     unsaved := aValue! !
 
@@ -3291,7 +3330,7 @@ views
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^views! !
 
@@ -3309,7 +3348,7 @@ views: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     views := aValue! !
 
@@ -3327,7 +3366,7 @@ warningMessage
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^MessageBox confirmWithCancel: 'You have unsaved changes. Are you sure you want to cancel?'! !
 
@@ -3345,7 +3384,7 @@ wasSaved
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^saved! !
 
@@ -3365,7 +3404,7 @@ includeClass
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^true! !
 
@@ -3386,7 +3425,7 @@ wbBasicVersion
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^3.11! !
 
@@ -3407,10 +3446,10 @@ aboutGhin
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     MessageBox message: 'World Handicap System
-Version 1.0 © 2025, Kambria Rogalski'! !
+Version 1.0 Â© 2025, Kambria Rogalski'! !
 
 
 
@@ -3431,7 +3470,7 @@ createMenus: aPane
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     #generated.
     aPane menuWindow
@@ -3479,7 +3518,7 @@ createViews
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     #generated.
     xDU := (SysFont width + 1 roundTo: 2) / 4.
@@ -3908,7 +3947,7 @@ currentPlayer
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^currentPlayer! !
 
@@ -3926,7 +3965,7 @@ currentPlayer: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     currentPlayer := aValue! !
 
@@ -3948,7 +3987,7 @@ deleteRound
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     selectedRound := (self paneNamed: 'mainGrid') selectedItem.
     userConfirmed := MessageBox confirmWithCancel: 'Do you really want to delete the round of ' , selectedRound score asString , ' on ' , selectedRound date asString , '?'.
@@ -3976,7 +4015,7 @@ editRound
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     dialog := WorldHandicapRoundEditDialog new.
     dialog openOn: self selectedRound.
@@ -3999,7 +4038,7 @@ exitProgram
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     self close.! !
 
@@ -4021,7 +4060,7 @@ fileExit
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     unsaved
         ifTrue:[
@@ -4053,7 +4092,7 @@ fileOpen
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     fileName := FileDialog getFilePrompt: 'Select a GHIN file' default: '*.ghin'.
     (fileName isNil or: [fileName isEmpty])
@@ -4092,7 +4131,7 @@ fileSave
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     dataDirectory := 'C:\LabWare-8\Data\'. "Use your actual directory path here, with trailing backslash"
     fileName := dataDirectory , (self currentPlayer ghinNumber , '.ghin').
@@ -4114,7 +4153,7 @@ initWindow
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     super initWindow.! !
 
@@ -4134,7 +4173,7 @@ newPlayer
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     dialog := WorldHandicapNewPlayerDialog new.
     dialog openOn.
@@ -4162,7 +4201,7 @@ newRound
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     self openNewRoundEditorWith: nil tee: nil score: nil.! !
 
@@ -4183,7 +4222,7 @@ newRoundMenubar
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     self openNewRoundEditorWith: nil tee: nil score: nil.! !
 
@@ -4204,7 +4243,7 @@ newRoundOnCourse
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     self openNewRoundEditorWith: self selectedCourse tee: self selectedTee score: nil.! !
 
@@ -4216,7 +4255,7 @@ openNewRoundEditorWith: aCourse tee: aTee score: aScore
 
 				"handles creating a new round from the grid or the menu bar, and can open a new round on a selected course with course, tee, and score"
     | player db newRound dialog |
-    #CodeTrackerBlock.  "Last Modified  17:44:09 07/28/25"
+    #CodeTrackerBlock.  "Last Modified  19:24:23 07/28/25"
     #LabWare. "Owner"
     #?. "Type"
     #?. "Project"
@@ -4225,7 +4264,7 @@ openNewRoundEditorWith: aCourse tee: aTee score: aScore
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     player := self currentPlayer.
     db := player database.
@@ -4264,7 +4303,7 @@ populateCourseGridFromMainGrid
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     mainGridRounds := (self paneNamed: 'mainGrid') contents.
     seenCombos := Set new.
@@ -4294,7 +4333,7 @@ populatePlayerFields
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     player := currentPlayer.
     (self paneNamed: 'playerNameField') value: player playerName.
@@ -4321,7 +4360,7 @@ populateRoundsGrid
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     allRounds := WorldHandicapDatabase new rounds.
     (self paneNamed: 'mainGrid') contents: allRounds.! !
@@ -4342,7 +4381,7 @@ saveToFile: fileName
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     player := self currentPlayer.
     fileStream := File newFile: fileName.
@@ -4373,7 +4412,7 @@ selectedCourse
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^(self paneNamed: 'mainGrid') selectedItem courseName! !
 
@@ -4391,7 +4430,7 @@ selectedRound
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^(self paneNamed: 'mainGrid') selectedItem.! !
 
@@ -4409,7 +4448,7 @@ selectedTee
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^(self paneNamed: 'mainGrid') selectedItem tees! !
 
@@ -4427,7 +4466,7 @@ unsaved
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^unsaved! !
 
@@ -4445,7 +4484,7 @@ unsaved: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     unsaved := aValue! !
 
@@ -4465,7 +4504,7 @@ updateAfterRoundsChanged
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #?. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     db := currentPlayer database.
     db assignRoundNumber.
@@ -4490,7 +4529,7 @@ views
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     ^views! !
 
@@ -4508,6 +4547,6 @@ views: aValue
     #SS5. "RevisedBy"
     #NotReviewed. "ReviewedBy"
     #None. "LabTrackId"
-    #CodeTrackerBlockEnd.  "Copyright © 2025 LabWare Inc."
+    #CodeTrackerBlockEnd.  "Copyright Â© 2025 LabWare Inc."
 
     views := aValue! !
